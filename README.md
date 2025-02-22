@@ -17,6 +17,9 @@ run app :
 
 app create (or recreate if older than 9 days) a cache file to stock php,js,html,css content
 
+
 app demand text to find
+
 when press enter :
+
 show filename line and highlight result.
