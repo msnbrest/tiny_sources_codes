@@ -103,6 +103,7 @@ void chercher( const char* path, std::string voulu ){
 
 	if( voulu=="" ){
 		std::cout << "(vide) Bye." << std::endl;
+		return;
 	}
 
     std::ifstream fichier(path);
