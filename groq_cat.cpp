@@ -50,7 +50,7 @@ void create_cache(const char* outputFilename){
 			}
 		}
 
-		cacheFile << ignored;
+		cacheFile << "\n=== ignoreds :\n" << ignored;
 		cacheFile.close();
 		std::cout << "Cache OK" << std::endl;
 	} else {
@@ -82,7 +82,7 @@ std::string pardon(){
 
 	std::string phrase;
 
-	std::cout << "Que chercher :" << std::endl;
+	std::cout << "\033[46m" << "Que chercher : (vide pour quitter)" << "\033[0m" << std::endl;
 	std::getline(std::cin, phrase);
 	return phrase;
 }
@@ -99,11 +99,11 @@ std::string trim_tab_spa(const std::string& str){ // retire les tab et espaces e
 
 
 
-void chercher( const char* path, std::string voulu ){
+bool chercher( const char* path, std::string voulu ){
 
 	if( voulu=="" ){
 		std::cout << "(vide) Bye." << std::endl;
-		return;
+		return false;
 	}
 
     std::ifstream fichier(path);
@@ -171,9 +171,10 @@ void chercher( const char* path, std::string voulu ){
             ind++;
         }
         fichier.close();
-    }else{
-        std::cout << "Cache indisponible" << std::endl;
+		return true;
     }
+    std::cout << "Cache indisponible" << std::endl;
+    return false;
 }
 
 
@@ -187,7 +188,7 @@ int main() {
 		create_cache("perime_2024.cache");
 	}
 
-	chercher( path, pardon() );
+	while(   chercher( path, pardon() )   ){}
 
 	return 0;
 }
